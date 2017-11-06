@@ -161,6 +161,13 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void AddLife()
+	{
+		// remove life and update GUI
+		lives++;
+		refreshGUI();
+	}
+
 	// public function for level complete
 	public void LevelCompete() {
 		// save the current player prefs before moving to the next level

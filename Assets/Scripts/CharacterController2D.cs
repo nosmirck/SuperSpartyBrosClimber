@@ -25,6 +25,8 @@ public class CharacterController2D : MonoBehaviour {
 
 	// SFXs
 	public AudioClip coinSFX;
+	public AudioClip diamondSFX;
+	public AudioClip heartSFX;
 	public AudioClip deathSFX;
 	public AudioClip fallSFX;
 	public AudioClip jumpSFX;
@@ -202,6 +204,7 @@ public class CharacterController2D : MonoBehaviour {
  	void FreezeMotion() {
 		playerCanMove = false;
 		_rigidbody.isKinematic = true;
+		_rigidbody.velocity = Vector2.zero;
 	}
 
 	// do what needs to be done to unfreeze the player
@@ -260,6 +263,22 @@ public class CharacterController2D : MonoBehaviour {
 
 	public void CollectCoin(int amount) {
 		PlaySound(coinSFX);
+
+		if (GameManager.gm) // add the points through the game manager, if it is available
+			GameManager.gm.AddPoints(amount);
+	}
+
+	public void CollectHeart(int amount)
+	{
+		PlaySound(heartSFX);
+
+		if (GameManager.gm) // add the points through the game manager, if it is available
+			GameManager.gm.AddLife();
+	}
+
+	public void CollectDiamond(int amount)
+	{
+		PlaySound(diamondSFX);
 
 		if (GameManager.gm) // add the points through the game manager, if it is available
 			GameManager.gm.AddPoints(amount);
